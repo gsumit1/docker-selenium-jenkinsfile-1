@@ -1,4 +1,9 @@
 pipeline {
+   agent {
+        node {
+            label 'docker' && 'maven'
+        }
+    }
      stages { 	
         stage('Build Jar') {
             steps {
