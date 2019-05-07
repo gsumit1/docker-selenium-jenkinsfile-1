@@ -13,7 +13,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                	app = docker.build("vinsdocker/containertest")
+                	app = docker.build("sghosh1/dodocker")
                 }
             }
         }
