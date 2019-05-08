@@ -1,13 +1,16 @@
+def dockerHome = tool 'dockerHome'
 pipeline {
    agent {
         node {
             label 'docker' && 'maven'
         }
     }
-    tools {
-    maven 'MAVEN_HOME'
-  }
      stages { 	
+        stage('Initialize'){
+        def dockerHome = tool 'dockerHome'
+        def mavenHome  = tool 'MAVEN_HOME'
+        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+    	}
         stage('Build Jar') {
             steps {
             
