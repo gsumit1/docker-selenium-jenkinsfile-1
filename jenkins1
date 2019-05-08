@@ -1,24 +1,24 @@
-  node {
+node {
         stage('Initialize'){
-        def dockerHome = tool 'dockerHome'
-        def mavenHome  = tool 'MAVEN_HOME'
+	 def dockerHome = tool 'dockerHome'
+ 	 def mavenHome  = tool 'MAVEN_HOME'
         env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
     	}
         stage('Build Jar') {
-            steps {
+            step {
 
                 sh 'mvn clean package -DskipTests'
             }
         }
         stage('Build Image') {
-            steps {
+            step {
                 script {
                 	app = docker.build("sghosh1/dodocker")
                 }
             }
         }
         stage('Push Image') {
-            steps {
+            step {
                 script {
 			        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 			        	app.push("${BUILD_NUMBER}")
