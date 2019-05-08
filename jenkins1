@@ -9,10 +9,8 @@ node {
         }
         stage('Build Image') {
            	sh 'docker.build(\"sghosh1/dodocker\")'
-                
-            }
         }
         stage('Push Image') {
         	sh 'docker.withRegistry(\'https://registry.hub.docker.com\', \'dockerhub\') {app.push(\"${BUILD_NUMBER}\")app.push(\"latest\")'
-            }       
+        }       
 }
