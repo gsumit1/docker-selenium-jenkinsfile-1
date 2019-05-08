@@ -6,7 +6,6 @@ pipeline {
     }
     tools {
     maven 'MAVEN_HOME'
-    docker 'dockerHome'
   }
      stages { 	
         stage('Build Jar') {
@@ -16,6 +15,15 @@ pipeline {
             }
         }
         stage('Build Image') {
+		agent {
+        docker {
+          // Set both label and image
+          label 'dockerHome'
+          image 'docker'
+        }
+	}
+	
+	
             steps {
                 script {
                 	app = docker.build("sghosh1/dodocker")
