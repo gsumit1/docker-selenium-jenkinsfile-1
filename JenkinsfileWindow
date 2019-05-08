@@ -12,14 +12,14 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                script {
+                bat {
                 	app = docker.build("sghosh1/dodocker")
                 }
             }
         }
         stage('Push Image') {
             steps {
-                script {
+                bat {
 			        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 			        	app.push("${BUILD_NUMBER}")
 			            app.push("latest")
