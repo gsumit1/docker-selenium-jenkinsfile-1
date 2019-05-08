@@ -5,13 +5,10 @@ node {
         env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
     	}
         stage('Build Jar') {
-            step {
-
                 sh 'mvn clean package -DskipTests'
-            }
         }
         stage('Build Image') {
-            step {
+            steps {
                 script {
                 	app = docker.build("sghosh1/dodocker")
                 }
